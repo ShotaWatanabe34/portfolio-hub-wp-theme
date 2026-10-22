@@ -1,0 +1,118 @@
+/* サイドバーを除いたサイト幅をレスポンシブ判定に使用。 */
+:root{--memo-panel-width:clamp(340px,38vw,540px)}
+.site-shell{container-type:inline-size;container-name:stage-site;width:100%;min-width:0}
+body.memo-is-open .site-shell{width:calc(100% - var(--memo-panel-width))}
+.memo-sidebar{width:var(--memo-panel-width)}
+@container stage-site (max-width: 1023px){.top-post-slider{--slides-visible:2}}
+@container stage-site (max-width: 767px){.top-post-slider{--slides-visible:1;--slider-gap:20px}}
+@container stage-site (max-width: 767px){.archive-layout{grid-template-columns:1fr;gap:28px}.archive-filters{padding:18px}.archive-mobile-jump{display:inline-block}}
+@container stage-site (max-width: 767px){.site-footer .footer-branding{display:none}}
+@container stage-site (max-width: 767px){.site-footer{margin-top:32px}.view-counter{gap:8px 14px;font-size:.72rem}}
+
+
+@container stage-site (max-width: 767px){.entry{padding:16px}}
+@container stage-site (max-width: 767px){.pagination.stage-pagination ul.page-numbers{gap:3px}.stage-pagination li>.page-numbers{min-width:27px;min-height:36px;padding:4px 5px;font-size:.8rem}.stage-pagination li>.dots{min-width:14px;padding-inline:0}}
+@container stage-site (max-width: 767px){.info-posts-band{padding:20px 0 28px}}
+@container stage-site (max-width: 767px){.showcase-track{gap:12px}.showcase-track>.top-post-card{flex-basis:78%}.showcase-band{padding:20px 0 28px}.showcase-prev,.showcase-next{width:36px;height:36px}.showcase-prev{left:2px}.showcase-next{right:2px}}
+@container stage-site (max-width: 767px){.top-post-prev,.top-post-next,.showcase-prev,.showcase-next{width:36px}}
+@container stage-site (max-width: 1023px){.tool-showcase-band .showcase-track>.top-post-card{flex-basis:calc((100% - 24px)/2)}}
+@container stage-site (max-width: 767px){.tool-showcase-band .showcase-track{gap:20px}.tool-showcase-band .showcase-track>.top-post-card{flex-basis:100%}}
+@container stage-site (max-width: 1023px){
+.section-inner,.site-header-inner,.global-nav-list{width:calc(100% - 32px)}
+.site-header-inner{gap:20px}.site-search{width:290px}
+.post-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.about-inner{grid-template-columns:1fr;gap:12px}
+}
+@container stage-site (max-width: 767px){
+.section-inner,.site-header-inner{width:calc(100% - 24px)}
+.site-header-inner{flex-direction:column;align-items:stretch;min-height:0;padding:18px 0;gap:18px}
+.site-branding-link{justify-content:center}.site-logo{width:42px;height:42px}.site-title{font-size:1.3rem}
+.site-search{width:100%;min-height:44px}
+.global-nav{overflow-x:auto}.global-nav-list{width:max-content;min-width:100%;grid-template-columns:repeat(5,minmax(112px,1fr))}
+.global-nav-link{min-height:52px;font-size:.85rem;flex-direction:column;gap:0}
+.top-posts{padding:32px 0 36px}.post-grid{grid-template-columns:1fr;gap:20px}
+.top-about{padding:36px 0}.section-title{font-size:1.5rem}
+.site-footer{padding-top:28px}.footer-top{flex-direction:column;align-items:flex-start;gap:20px}
+.footer-branding{justify-content:flex-start}.footer-policies{grid-template-columns:1fr;gap:12px}
+.content-main{padding:32px 0 40px}
+}
+/* 小画面では上下分割して、本文が極端に細くなるのを防ぐ。 */
+@media(max-width:899px){
+ body.memo-is-open{overflow:hidden}
+ body.memo-is-open .site-shell{width:100%;height:55dvh;overflow:auto;scroll-padding-top:16px}
+ body.memo-is-open .memo-sidebar{top:auto;bottom:0;width:100%;height:45dvh}
+ body.admin-bar.memo-is-open .site-shell{height:calc(55dvh - 32px)}
+}
+@media(max-width:782px){body.admin-bar.memo-is-open .site-shell{height:calc(55dvh - 46px)}}
+
+
+
+
+/* 1.12.0：短いページでもフッターの黒背景を画面下端まで延ばす。 */
+html,body{background:#111}
+.site-shell{display:flex;flex-direction:column;min-height:100vh;min-height:100svh;background:var(--color-bg)}
+.site-shell>.site-header,.site-shell>.site-main,.site-shell>.footer-return{flex-shrink:0}
+.site-shell>.site-footer{flex:1 0 auto;background:#111}
+body.admin-bar .site-shell{min-height:calc(100vh - 32px);min-height:calc(100svh - 32px)}
+
+/* タイトル帯はメモボタン44pxに近い52px。検索欄は34px。 */
+.site-header{background:#111;color:#fff;border-top:0}
+.site-header .site-header-inner{min-height:52px;padding:4px 56px 4px 0;gap:16px;flex-direction:row;align-items:center;width:min(calc(100% - 32px),var(--content-width));margin-inline:auto}
+.site-header .site-branding-link{color:#fff;gap:10px;flex:1 1 auto;min-width:0;justify-content:flex-start}
+.site-header .site-logo{width:36px;height:36px}
+.site-header .site-title{font-size:clamp(1rem,1.7vw,1.3rem);font-weight:400;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.site-header .site-search{width:260px;max-width:45%;min-height:34px;height:34px;flex:0 1 260px;border-color:#666;background:#222}
+.site-header .site-search-input{padding:4px 10px;background:#222;color:#fff;font-size:16px;line-height:24px}
+.site-header .site-search-input::placeholder{color:#ccc}
+.site-header .site-search-button{padding:4px 12px;background:#333;color:#fff;font-size:13px;line-height:24px}
+.site-header .site-search-button:hover{background:#484848}
+.memo-menu{top:4px;background:#111}
+.admin-bar .memo-menu{top:36px}
+.footer-policies{list-style:none;padding:0;margin:0;grid-template-columns:repeat(3,minmax(0,1fr))}
+.footer-policies>li{min-width:0}
+.footer-contact>a{display:block;font-weight:700}
+@container stage-site (max-width:767px){
+ .site-header .site-header-inner{gap:8px}
+ .site-header .site-logo{width:30px;height:30px}
+ .site-header .site-search{max-width:52%;flex-basis:200px}
+ .site-header .site-search-input{padding-inline:6px}
+ .site-header .site-search-button{padding-inline:8px}
+ .footer-policies{grid-template-columns:1fr;gap:12px}
+}
+@container stage-site (max-width:380px){
+ .site-header .site-logo{display:none}
+ .site-header .site-title{font-size:.9rem}
+ .site-header .site-search{max-width:58%}
+}
+@media(max-width:782px){body.admin-bar .site-shell{min-height:calc(100svh - 46px)}.admin-bar .memo-menu{top:50px}}
+/* メモの上下分割中はサイト枠を画面全高へ引き延ばさない。 */
+@media(max-width:899px){body.memo-is-open .site-shell,body.admin-bar.memo-is-open .site-shell{min-height:0}}
+
+/* ナビ下と「先頭へ戻る」の1行領域を同じ高さにする。12px+本文行高+16px。 */
+:root{--stage-navigation-gap:calc(28px + 1.445rem)}
+.site-header::after{content:"";display:block;height:var(--stage-navigation-gap);background:var(--color-bg)}
+.site-shell>.content-main{padding-top:0}
+.footer-return{font-size:.85rem;line-height:1.7;min-height:var(--stage-navigation-gap)}
+.footer-return .back-to-top{font-size:inherit}
+.content-main>.section-inner>h1.screen-reader-text+p{margin-top:0}
+
+/* 1.15.0：黒帯内の上下余白と、黒帯間の青い余白を共通化する。 */
+:root{--stage-band-padding:32px;--stage-band-gap:var(--stage-navigation-gap)}
+.site-shell>.band-main{background:#18232b;color:#f5f8fa;padding-block:0;min-height:0}
+.site-shell .top-posts,.site-shell .info-posts-band,.site-shell .showcase-band{padding-block:var(--stage-band-padding);margin-block:0}
+.band-main>.showcase-band+.showcase-band,
+.band-main>.showcase-band~.info-posts-band{border-top:var(--stage-band-gap) solid var(--color-bg)}
+/* 記事が少ないページでも、末尾の段落marginを黒帯の余白へ加算しない。 */
+.band-main .info-posts-band>.section-inner>:last-child{margin-bottom:0}
+.site-shell .stage-pagination{margin-top:32px}
+.site-shell .pagination.stage-pagination ul.page-numbers{gap:8px;padding-block:10px}
+.site-shell .stage-pagination li>.page-numbers{min-width:44px;min-height:44px;padding:7px 12px;font-size:.95rem}
+.site-shell .stage-pagination li>.dots{min-width:20px;padding-inline:2px}
+.site-shell .pagination-icon{width:20px;height:20px}
+@container stage-site (max-width:767px){
+ .site-shell{--stage-band-padding:24px}
+ .top-posts,.info-posts-band,.showcase-band{--stage-band-padding:24px}
+ .site-shell .pagination.stage-pagination ul.page-numbers{gap:6px}
+ .site-shell .stage-pagination li>.page-numbers{min-width:40px;min-height:44px;padding:6px 9px;font-size:.9rem}
+ .site-shell .stage-pagination li>.dots{min-width:16px;padding-inline:0}
+}
